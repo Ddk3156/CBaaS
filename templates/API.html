@@ -1,0 +1,335 @@
+<!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate API Key</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: url('static/background.jpg') no-repeat center center/cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            margin: 0;
+        }
+
+        .container {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            width: 400px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        h2 {
+            font-weight: 600;
+        }
+
+        .generate-btn {
+            background: linear-gradient(135deg, #ff7eb3, #ff758c);
+            border: none;
+            padding: 12px 20px;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 20px;
+        }
+
+        .generate-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .disabled {
+            background: gray !important;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .popup-card {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            width: 320px;
+            animation: slideIn 0.5s ease-in-out;
+        }
+
+        .api-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f3f3f3;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .copy-btn, .close-btn {
+            border: none;
+            padding: 5px 8px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+
+        .copy-btn {
+            background: green;
+            color: white;
+        }
+
+        .close-btn {
+            background: red;
+            color: white;
+        }
+
+        .back-btn {
+            margin-top: 20px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Your API Key</h2>
+        <p>Note: You can copy your API key only once. If you close the card, you will not be able to see it again.</p>
+        <div class="api-container">
+            <span class="api-key" id="apiKey"></span>
+            <button class="copy-btn" onclick="copyApiKey()">Copy</button>
+        </div>
+        <button class="close-btn" onclick="closePopup()">Close</button>
+    </div>
+
+    <p class="back-btn" onclick="goBack()">← Back</p>
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate API Key</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: url('static/background.jpg') no-repeat center center/cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            margin: 0;
+        }
+
+        .container {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            width: 400px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        h2 {
+            font-weight: 600;
+        }
+
+        .generate-btn {
+            background: linear-gradient(135deg, #ff7eb3, #ff758c);
+            border: none;
+            padding: 12px 20px;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 20px;
+        }
+
+        .generate-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .disabled {
+            background: gray !important;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .popup-card {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            width: 450px;
+            animation: slideIn 0.5s ease-in-out;
+        }
+
+        .api-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f3f3f3;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .copy-btn {
+            background: green;
+            color: white;
+            border: none;
+            padding: 5px 8px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .close-btn {
+            background: red;
+            color: white;
+            border: none;
+            padding: 5px 8px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+
+        .back-btn {
+            margin-top: 20px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Generate Your API Key</h2>
+        <p>Note: You can copy your API key only once. If you close the card, you will not be able to see it again.</p>
+        <button class="generate-btn" id="generateBtn" onclick="generateApiKey()">Generate API Key</button>
+    </div>
+
+    <div class="popup-card" id="apiPopup">
+        <h3>Your API Key</h3>
+        <div class="api-container">
+            <span class="api-key" id="apiKey"></span>
+            <button class="copy-btn" onclick="copyApiKey()">Copy</button>
+        </div>
+        <button class="close-btn" onclick="closePopup()">Close</button>
+    </div>
+
+    <p class="back-btn" onclick="goBack()">← Back</p>
+
+
+
+
+    <script>
+        
+        
+        function generateApiKey() {
+            const apiKey = "API-" + Math.random().toString(36).substr(2, 16).toUpperCase();
+            document.getElementById("apiKey").innerText = apiKey;
+            document.getElementById("apiPopup").style.display = "block";
+        }
+
+
+        function generateApiKey() {
+            const userId = 'automatic_user'; // Or generate a temporary ID here
+            fetch("/generate_api_key", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ user_id: userId })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.api_key) {
+                    document.getElementById("apiKey").innerText = data.api_key;
+                    document.getElementById("apiPopup").style.display = "block";
+                } else {
+                    alert("Failed to generate API key automatically!");
+                }
+            })
+            .catch(error => {
+                console.error("Error fetching API key:", error);
+                alert("An error occurred while generating the API key automatically.");
+            });
+        }
+
+        function copyApiKey() {
+            const apiKeyText = document.getElementById("apiKey").innerText;
+            navigator.clipboard.writeText(apiKeyText);
+            alert("API Key Copied!");
+        }
+
+        function closePopup() {
+            document.getElementById("apiPopup").style.display = "none";
+            disableGenerateButton();
+        }
+
+        function disableGenerateButton() {
+            let btn = document.getElementById("generateBtn");
+            btn.classList.add("disabled");
+            btn.innerText = "API Key Generated";
+            btn.onclick = null;
+        }
+
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+</html>

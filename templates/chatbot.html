@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chatbot</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Highlight.js for syntax highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <!-- Marked.js for markdown parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-box" id="chat-box">
+            <div class="chat-message bot">Hello! How can I help you?</div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="user-input" placeholder="Type a message or paste a link..." />
+            <button onclick="sendMessage()">Send</button>
+            <input type="file" id="file-upload" style="display: none;" onchange="uploadFile()">
+            <button class="upload-button" onclick="document.getElementById('file-upload').click()">Upload File</button>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
+
+<!--AIzaSyDzvY-_3mx16gPVeJvlKoHUyWyQ9vLoNao-->

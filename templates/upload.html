@@ -1,0 +1,474 @@
+<!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Database - Ather-Bot</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: url('/static/background.jpg') no-repeat center center/cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .upload-container {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            max-width: 450px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        h1 {
+            color: #fff;
+            font-size: 28px;
+        }
+
+        p {
+            color: #eee;
+            font-size: 14px;
+        }
+
+        .input-group {
+            margin: 15px 0;
+            text-align: left;
+        }
+
+        label {
+            color: #fff;
+            font-size: 14px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            outline: none;
+            background: rgba(255, 255, 255, 0.3);
+            color: #fff;
+        }
+
+        button {
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            border: none;
+            padding: 12px 18px;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin: 10px;
+        }
+
+        button:hover {
+            transform: scale(1.08);
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.6);
+        }
+
+        .file-dropdown {
+            display: none;
+            background: rgba(255, 255, 255, 0.9);
+            color: black;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 5px;
+            list-style: none;
+            max-height: 100px;
+            overflow-y: auto;
+            text-align: left;
+        }
+
+        .file-dropdown li {
+            padding: 5px;
+            display: flex;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+
+        .file-dropdown li span {
+            color: red;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="upload-container">
+        <h1>Upload Database</h1>
+        <p>Please upload up to 3 files (.txt, .pdf, .csv, .xlsx, .xls, .docx) or 1 URL.</p>
+
+        <form id="uploadForm" action="/uploadDB" method="post" enctype="multipart/form-data">
+            <div class="input-group">
+                <label for="databaseFile">Files (Max 3):</label>
+                <input type="file" id="databaseFile" name="databaseFile" multiple accept=".txt, .pdf, .csv, .xlsx, .xls, .docx" onchange="updateFileList()">
+                <ul id="fileList" class="file-dropdown"></ul>
+            </div>
+
+            <div class="input-group">
+                <label for="databaseUrl">Database URL:</label>
+                <input type="url" id="databaseUrl" name="databaseUrl">
+            </div>
+            <button type="submit">Upload</button>
+            <p id="errorMessage" style="color: red;"></p>
+        </form>
+
+        <button onclick="location.href='/chatb'">Try the Bot</button>
+        <button onclick="location.href='/API'">Get API Keys</button>
+        
+    </div>
+
+    <script>
+        function updateFileList() {
+            const fileInput = document.getElementById('databaseFile');
+            const fileList = document.getElementById('fileList');
+            fileList.innerHTML = '';
+
+            if (fileInput.files.length > 0) {
+                fileList.style.display = 'block';
+            } else {
+                fileList.style.display = 'none';
+            }
+
+            for (let i = 0; i < fileInput.files.length; i++) {
+                const fileName = fileInput.files[i].name;
+                const listItem = document.createElement('li');
+                listItem.innerHTML = `${fileName} <span onclick="removeFile(${i})">❌</span>`;
+                fileList.appendChild(listItem);
+            }
+        }
+
+        function removeFile(index) {
+            const fileInput = document.getElementById('databaseFile');
+            let fileList = Array.from(fileInput.files);
+            fileList.splice(index, 1);
+
+            const dataTransfer = new DataTransfer();
+            fileList.forEach(file => dataTransfer.items.add(file));
+            fileInput.files = dataTransfer.files;
+
+            updateFileList();
+        }
+    </script>
+</body>
+</html>
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Upload Database - Ather-Bot</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: url('/static/background.jpg') no-repeat center center/cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    .upload-container {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      max-width: 450px;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+    }
+
+    h1 {
+      color: #fff;
+      font-size: 28px;
+    }
+
+    p {
+      color: #eee;
+      font-size: 14px;
+    }
+
+    .input-group {
+      margin: 15px 0;
+      text-align: left;
+    }
+
+    label {
+      color: #fff;
+      font-size: 14px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+      outline: none;
+      background: rgba(255, 255, 255, 0.3);
+      color: #fff;
+    }
+
+    button {
+      background: linear-gradient(135deg, #4facfe, #00f2fe);
+      border: none;
+      padding: 12px 18px;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+      margin: 10px;
+    }
+
+    button:disabled {
+      background: #aaa;
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+
+    button:hover:enabled {
+      transform: scale(1.08);
+      box-shadow: 0 0 15px rgba(0, 242, 254, 0.6);
+    }
+
+    .file-dropdown {
+      display: none;
+      background: rgba(255, 255, 255, 0.9);
+      color: black;
+      padding: 10px;
+      border-radius: 5px;
+      margin-top: 5px;
+      list-style: none;
+      max-height: 100px;
+      overflow-y: auto;
+      text-align: left;
+    }
+
+    .file-dropdown li {
+      padding: 5px;
+      display: flex;
+      justify-content: space-between;
+      cursor: pointer;
+    }
+
+    .file-dropdown li span {
+      color: red;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="upload-container">
+    <h1>Upload Database</h1>
+    <p>Please upload up to 3 files (.txt, .pdf, .csv, .xlsx, .xls, .docx) or 1 URL.</p>
+
+    <form id="uploadForm" action="/uploadDB" method="post" enctype="multipart/form-data">
+      <div class="input-group">
+        <label for="databaseFile">Files (Max 3):</label>
+        <input type="file" id="databaseFile" name="databaseFile" multiple accept=".txt,.pdf,.csv,.xlsx,.xls,.docx" onchange="handleInputChange()">
+        <ul id="fileList" class="file-dropdown"></ul>
+      </div>
+
+      <div class="input-group">
+        <label for="databaseUrl">Database URL:</label>
+        <input type="url" id="databaseUrl" name="databaseUrl" oninput="handleInputChange()">
+      </div>
+
+      <button id="uploadBtn" type="submit" disabled>Upload</button>
+      <p id="errorMessage" style="color: red;"></p>
+      <p id="successMessage" style="color: green; display: none;"></p>
+    </form>
+
+    <button id="downloadChatbotBtn" onclick="downloadChatbot()" disabled style="background: linear-gradient(135deg, #28a745, #20c997); margin-top: 10px;">
+      <i class="fas fa-download"></i> Download Chatbot ZIP
+    </button>
+    <button id="getApiBtn" onclick="location.href='/API'" disabled>Get API Keys</button>
+    <button id="tryBotBtn" onclick="location.href='/chatb'">Try the Bot</button>
+  </div>
+
+  <script>
+    const fileInput = document.getElementById('databaseFile');
+    const urlInput = document.getElementById('databaseUrl');
+    const uploadBtn = document.getElementById('uploadBtn');
+    const getApiBtn = document.getElementById('getApiBtn');
+    const fileList = document.getElementById('fileList');
+
+    function handleInputChange() {
+      updateFileList();
+      toggleButtons();
+    }
+
+    function updateFileList() {
+      fileList.innerHTML = '';
+      const files = fileInput.files;
+
+      if (files.length > 0) {
+        fileList.style.display = 'block';
+      } else {
+        fileList.style.display = 'none';
+      }
+
+      for (let i = 0; i < files.length; i++) {
+        const li = document.createElement('li');
+        li.innerHTML = `${files[i].name} <span onclick="removeFile(${i})">❌</span>`;
+        fileList.appendChild(li);
+      }
+    }
+
+    function removeFile(index) {
+      let files = Array.from(fileInput.files);
+      files.splice(index, 1);
+
+      const dataTransfer = new DataTransfer();
+      files.forEach(file => dataTransfer.items.add(file));
+      fileInput.files = dataTransfer.files;
+
+      handleInputChange();
+    }
+
+    function toggleButtons() {
+      const hasFile = fileInput.files.length > 0;
+      const hasUrl = urlInput.value.trim() !== '';
+      const enable = hasFile || hasUrl;
+
+      uploadBtn.disabled = !enable;
+      getApiBtn.disabled = !enable;
+      
+      // Check if ready for download
+      checkIfReady();
+    }
+    
+    async function checkIfReady() {
+      try {
+        const response = await fetch('/check_ready');
+        const data = await response.json();
+        
+        const downloadBtn = document.getElementById('downloadChatbotBtn');
+        if (data.ready) {
+          downloadBtn.disabled = false;
+        } else {
+          downloadBtn.disabled = true;
+        }
+      } catch (error) {
+        console.error('Error checking readiness:', error);
+      }
+    }
+    
+    async function downloadChatbot() {
+      const downloadBtn = document.getElementById('downloadChatbotBtn');
+      const successMsg = document.getElementById('successMessage');
+      const errorMsg = document.getElementById('errorMessage');
+      
+      // Disable button and show loading
+      downloadBtn.disabled = true;
+      downloadBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating ZIP...';
+      successMsg.style.display = 'none';
+      errorMsg.textContent = '';
+      
+      try {
+        const response = await fetch('/generate_chatbot', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+        
+        if (response.ok) {
+          // Get the blob and create download link
+          const blob = await response.blob();
+          const url = window.URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = `chatbot_${new Date().toISOString().slice(0,10)}.zip`;
+          document.body.appendChild(a);
+          a.click();
+          window.URL.revokeObjectURL(url);
+          document.body.removeChild(a);
+          
+          successMsg.textContent = 'Chatbot ZIP downloaded successfully! Extract and open index.html to use it.';
+          successMsg.style.display = 'block';
+          downloadBtn.innerHTML = '<i class="fas fa-check"></i> Downloaded!';
+        } else {
+          const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
+          errorMsg.textContent = errorData.error || 'Failed to generate chatbot. Please try again.';
+          downloadBtn.disabled = false;
+          downloadBtn.innerHTML = '<i class="fas fa-download"></i> Download Chatbot ZIP';
+        }
+      } catch (error) {
+        console.error('Error downloading chatbot:', error);
+        errorMsg.textContent = 'An error occurred while generating the chatbot. Please try again.';
+        downloadBtn.disabled = false;
+        downloadBtn.innerHTML = '<i class="fas fa-download"></i> Download Chatbot ZIP';
+      }
+    }
+    
+    // Check readiness on page load
+    window.addEventListener('load', () => {
+      checkIfReady();
+    });
+    
+    // Handle form submission
+    document.getElementById('uploadForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const formData = new FormData(e.target);
+      const uploadBtn = document.getElementById('uploadBtn');
+      const errorMsg = document.getElementById('errorMessage');
+      const successMsg = document.getElementById('successMessage');
+      
+      uploadBtn.disabled = true;
+      uploadBtn.textContent = 'Uploading...';
+      errorMsg.textContent = '';
+      successMsg.style.display = 'none';
+      
+      try {
+        const response = await fetch('/uploadDB', {
+          method: 'POST',
+          body: formData
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok) {
+          successMsg.textContent = data.message || 'Files uploaded successfully!';
+          successMsg.style.display = 'block';
+          
+          // Enable download button after successful upload
+          setTimeout(() => {
+            checkIfReady();
+            document.getElementById('downloadChatbotBtn').disabled = false;
+          }, 500);
+        } else {
+          errorMsg.textContent = data.error || 'Upload failed. Please try again.';
+        }
+      } catch (error) {
+        errorMsg.textContent = 'An error occurred during upload. Please try again.';
+        console.error('Upload error:', error);
+      } finally {
+        uploadBtn.disabled = false;
+        uploadBtn.textContent = 'Upload';
+      }
+    });
+  </script>
+</body>
+</html>

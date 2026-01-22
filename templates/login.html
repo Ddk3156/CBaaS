@@ -1,0 +1,486 @@
+<!--
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Login - AI Chatbot</title>
+        <style>
+            body {
+                font-family: "Playfair Display", serif;
+                margin: 0;
+                padding: 0;
+                background: url("/static/background.jpg") no-repeat center
+                    center/cover;
+                color: white;
+                text-align: center;
+                overflow-x: hidden;
+            }
+
+            h1,
+            h2,
+            h3 {
+                font-family: "Playfair Display", serif;
+                font-weight: 700;
+            }
+
+            p {
+                font-family: "Playfair Display", serif;
+                font-weight: 400;
+                line-height: 1.6;
+            }
+
+            .overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                backdrop-filter: blur(10px);
+                background: rgba(0, 0, 0, 0.5);
+                z-index: -1;
+            }
+
+            .animated-bg {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: url("wave.png") repeat-x bottom;
+                opacity: 0.3;
+                animation: waveMove 10s linear infinite;
+                z-index: -1;
+            }
+
+            .loginrobot-container {
+                width: 400px;
+                height: 400px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: absolute;
+                right: 5%;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+
+            .loginrobot-container img {
+                width: 100%;
+                height: auto;
+                animation: float 3s infinite ease-in-out;
+            }
+
+            .background {
+                position: relative;
+                width: 100%;
+                height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            /* Login Container */
+            .login-container {
+                width: 400px;
+                padding: 30px;
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 15px;
+                backdrop-filter: blur(12px);
+                box-shadow: 0px 5px 20px rgba(255, 255, 255, 0.2);
+                text-align: center;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                animation: fadeInUp 1s ease-in-out;
+            }
+
+            /* Input Fields */
+            .input-group {
+                margin: 10px 0;
+            }
+
+            input {
+                width: 100%;
+                padding: 15px;
+                border: none;
+                border-radius: 8px;
+                outline: none;
+                font-size: 18px;
+            }
+
+            /* Buttons */
+            .login-btn {
+                width: 100%;
+                padding: 15px;
+                border: none;
+                border-radius: 30px;
+                background: linear-gradient(45deg, #6b73ff, #9a76ff);
+                color: white;
+                font-size: 20px;
+                cursor: pointer;
+                transition: transform 0.3s, box-shadow 0.3s;
+            }
+
+            .login-btn:hover {
+                transform: scale(1.07);
+                box-shadow: 0px 4px 20px rgba(255, 255, 255, 0.3);
+            }
+
+            /* Signup & Login Links */
+            .signup-text {
+                margin-top: 15px;
+                font-size: 14px;
+                color: white;
+            }
+
+            .signup-text a {
+                color: #ffcc00;
+                text-decoration: none;
+                font-weight: bold;
+                transition: color 0.3s;
+            }
+
+            .signup-text a:hover {
+                color: #ff9900;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="overlay"></div>
+        <div class="animated-bg"></div>
+
+        <div class="background">
+            <div class="loginrobot-container">
+                <img src="static/login-robo.png" alt="AI Robot" />
+            </div>
+
+            <div class="login-container">
+                <h2>Login</h2>
+                <form id="loginForm">
+                    <div class="input-group">
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Email"
+                            required
+                        />
+                    </div>
+                    <div class="input-group">
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Password"
+                            required
+                        />
+                    </div>
+                    <button type="submit" class="login-btn">Login</button>
+                </form>
+                <p class="signup-text">
+                    Don't have an account? <a onclick="location.href='/signup'">Sign Up</a>
+                </p>
+            </div>
+        </div>
+        <script>
+    document.getElementById("loginForm").addEventListener("submit", function (event) {
+      event.preventDefault();
+  
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+  
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!email || !password) {
+        alert("Please fill in all fields.");
+        return;
+      }
+  
+      if (!emailRegex.test(email)) {
+        alert("Please enter a valid email address.");
+        return;
+      }
+  
+      fetch("http://localhost:5000/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password })
+      })
+      .then(res => res.text())
+      .then(response => {
+        console.log("Server Response:", response); // 🔍 Debugging
+        if (response === "Login successful") {
+onclick="location.href='/login'"
+        } else {
+          //alert(response); // Show message from backend
+          window.location.href = "/home";  
+        }
+      })
+      /*
+      .catch(err => {
+        console.error("Error:", err);
+        alert("Login failed. Try again later.");
+      });*/
+    });
+  </script>
+    </body>
+</html>
+-->
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - AI Chatbot</title>
+    <style>
+    
+    body {
+            font-family: 'Playfair Display', serif;
+            margin: 0;
+            padding: 0;
+            background: url('/static/background.jpg') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        p {
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
+            line-height: 1.6;
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.5);
+            z-index: -1;
+        }
+        
+         .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('wave.png') repeat-x bottom;
+            opacity: 0.3;
+            animation: waveMove 10s linear infinite;
+            z-index: -1;
+        }
+        
+        .loginrobot-container {
+            width: 400px;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            right: 5%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .loginrobot-container img {
+            width: 100%;
+            height: auto;
+            animation: float 3s infinite ease-in-out;
+        }
+
+        .background {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    
+        /* Login Container */
+        .login-container {
+            width: 400px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0px 5px 20px rgba(255, 255, 255, 0.2);
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: fadeInUp 1s ease-in-out;
+        }
+
+        /* Input Fields */
+        .input-group {
+            margin: 10px 0;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            outline: none;
+            font-size: 18px;
+        }
+
+        /* Buttons */
+        .login-btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 30px;
+            background: linear-gradient(45deg, #6b73ff, #9a76ff);
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .login-btn:hover {
+            transform: scale(1.07);
+            box-shadow: 0px 4px 20px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Signup & Login Links */
+        .signup-text {
+            margin-top: 15px;
+            font-size: 14px;
+            color: white;
+        }
+
+        .signup-text a {
+            color: #ffcc00;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .signup-text a:hover {
+            color: #ff9900;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="overlay"></div>
+    <div class="animated-bg"></div>
+
+    <div class="background">
+        <div class="loginrobot-container">
+            <img src="static/login-robo.png" alt="AI Robot">
+        </div>
+
+        <div class="login-container">
+            <h2>Login</h2>
+            <form id="loginForm">
+                <div class="input-group">
+                    <input type="email" id="email" name="email" placeholder="Email" required>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="password" name="password" placeholder="Password" required>
+                </div>
+                <button type="submit" class="login-btn" onclick="location.href='/home'">Login</button>
+            </form>
+            <p class="signup-text">Don't have an account? <a href="/signup">Sign Up</a></p>
+        </div>
+    </div>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const formData = new FormData(this);
+            const formDataObject = Object.fromEntries(formData);
+
+            fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formDataObject),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message === 'Login successful') {
+                    window.location.href = "upload.html";
+                } else {
+                    alert(data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred.');
+            });
+        });
+
+    // Server-side JavaScript (Node.js/Express) - You'd typically run this in a separate Node.js environment
+    // For demonstration, it's included as a string. In a real setup, this would be in a .js file.
+
+    const express = require('express');
+    const mongoose = require('mongoose');
+    const bodyParser = require('body-parser');
+
+    const app = express();
+    const PORT = process.env.PORT || 3000;
+
+    // MongoDB Connection String
+    const MONGODB_URI = 'mongodb+srv://your_username:your_password@your_cluster.mongodb.net/your_database?retryWrites=true&w=majority';
+
+    mongoose.connect(MONGODB_URI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    })
+    .then(() => console.log('MongoDB Connected'))
+    .catch(err => console.error('MongoDB Connection Error:', err));
+
+    const userSchema = new mongoose.Schema({
+        email: { type: String, required: true, unique: true },
+        password: { type: String, required: true },
+    });
+
+    const User = mongoose.model('User', userSchema);
+
+    app.use(bodyParser.json());
+    app.use(bodyParser.urlencoded({ extended: true }));
+
+    app.post('/login', async (req, res) => {
+        try {
+            const { email, password } = req.body;
+
+            const user = await User.findOne({ email, password });
+
+            if (user) {
+                res.json({ message: 'Login successful' });
+            } else {
+                res.status(401).json({ message: 'Invalid credentials' });
+            }
+        } catch (error) {
+            console.error('Login Error:', error);
+            res.status(500).json({ message: 'Internal server error' });
+        }
+    });
+
+    app.listen(PORT, () => {
+        console.log(`Server is running on port ${PORT}`);
+    });
+
+    </script>
+</body>
+</html>
