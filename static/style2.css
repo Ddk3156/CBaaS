@@ -1,0 +1,112 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('background.jpg'); /* Replace with your blurred image */
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #fff; /* Default text color to white */
+}
+
+.chat-container {
+    width: 800px; /* Set width back to the original larger size */
+    max-width: 95%;
+    height: 80vh; /* Set height back to the original larger size */
+    background-color: rgba(255, 255, 255, 0.1); /* Very light translucent white */
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    backdrop-filter: blur(10px); /* Glass-like blur effect */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
+}
+
+.chat-box {
+    flex-grow: 1;
+    padding: 15px;
+    overflow-y: auto;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Subtle divider */
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-message {
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border-radius: 15px;
+    max-width: 80%;
+    clear: both;
+    background-color: rgba(255, 255, 255, 0.2); /* Translucent message bubbles */
+}
+
+.chat-message.user {
+    align-self: flex-end;
+    float: right;
+    background-color: rgba(173, 216, 230, 0.3); /* Light blue translucent for user */
+    color: #fff;
+}
+
+.chat-message.bot {
+    align-self: flex-start;
+    float: left;
+    color: #fff;
+}
+
+.chat-input {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.chat-input input[type="text"] {
+    flex-grow: 1;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 20px;
+    margin-right: 10px;
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    caret-color: #fff; /* White cursor */
+}
+
+.chat-input input::placeholder {
+    color: rgba(255, 255, 255, 0.6); /* Light placeholder text */
+}
+
+.chat-input button,
+.upload-button {
+    background-color: #ADD8E6; /* Light blue background */
+    color: #fff; /* White text */
+    padding: 8px 15px;
+    border: 1px solid #fff; /* White border */
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Subtle button shadow */
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.chat-input button:hover,
+.upload-button:hover {
+    background-color: #87CEEB; /* Slightly darker light blue on hover */
+    border-color: #ccc; /* Slightly gray border on hover */
+}
+
+.upload-button {
+    margin-left: 5px;
+    background-color: transparent; /* Transparent background for upload button */
+    color: #fff;
+    border: 1px solid #fff; /* White border */
+}
+
+.upload-button:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Slightly lighter on hover */
+    border-color: #ccc;
+}
