@@ -25,7 +25,7 @@ CORS(app)
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'csv', 'xlsx', 'xls', 'docx'}
 
 # MongoDB Connection
-MONGO_URI = "mongodb+srv://xyz:sYeyohvGhqF67jEg@trialcluster.b5jsb.mongodb.net/?retryWrites=true&w=majority&appName=trialCluster"
+MONGO_URI = "uri"
 client = MongoClient(MONGO_URI)
 mongo = client
 #mongo = PyMongo(app)
@@ -285,35 +285,6 @@ def upload_files():
             return jsonify({'message': 'Files uploaded successfully', 'file_paths': file_paths}), 200
 
         elif url:
-            '''
-            try:
-                response = requests.get(url, stream=True)
-                response.raise_for_status()
-
-                content_type = response.headers.get('content-type')
-                extension = mimetypes.guess_extension(content_type)
-                if extension not in ['.txt','.pdf','.csv','.xlsx','.xls','.docx',]:
-                  return jsonify({'error': 'URL does not point to an allowed file type.'}), 400
-
-                filename = f"url_file{extension}"
-                filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-
-                with open(filepath, 'wb') as f:
-                    for chunk in response.iter_content(chunk_size=8192):
-                        f.write(chunk)
-
-                mongo.db.urls.insert_one({
-                    'url': url,
-                    'filepath': filepath,
-                    'filename': filename,
-                })
-
-                return jsonify({'message': 'URL content saved successfully', 'file_path': filepath}), 200
-
-            except requests.exceptions.RequestException as e:
-                return jsonify({'error': f'Failed to fetch URL: {e}'}), 400
-                '''
-               
             data = request.get_json()
             url = data.get('url', '').strip()
 
@@ -339,3 +310,4 @@ def upload_files():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
